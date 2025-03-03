@@ -1,0 +1,27 @@
+name: Daily Shipment Check
+
+on:
+  schedule:
+    # UTCの0:00に実行。日本時間で実行したい場合はcron設定を調整してください
+    - cron: '0 0 * * *'
+  workflow_dispatch:  # 手動実行も可能にするためのオプション
+
+jobs:
+  shipment-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run shipment check script
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: python check_bids.py
