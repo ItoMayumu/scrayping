@@ -1,17 +1,15 @@
 import requests
 import json
 import os
-from dotenv import load_dotenv
 
-load_dotenv()  
 JSON_FILE = "data.json"  # 保存する JSON ファイル名
 
 # 正しいログインURL
-LOGIN_URL = "https://api.torakuru.net/V0/login"
-DATA_URL = "https://api.torakuru.net/V0/protected/admin/getShipmentsWithoutBids?page=1&limit=10"
+LOGIN_URL = "https://ax-corp.apis.ai-ot.net/V0/login"
+DATA_URL = "https://ax-corp.apis.ai-ot.net/V0/protected/admin/getShipmentsWithoutBids?page=1&limit=10"
 
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
-SLACK_CHANNEL = "G4CKCNBAS"  
+SLACK_CHANNEL = "G4CKCNBAS"  # 送信先の Slack チャンネル（適宜変更）
 
 def send_to_slack(message):
     if not SLACK_BOT_TOKEN:
