@@ -2,14 +2,15 @@ name: 荷物ID JSON自動更新
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 30分ごとに実行（適宜調整）
+    - cron: '0 0 * *'
   workflow_dispatch:
+
+permissions:
+  contents: write   # ← これを追加すれば解決します
 
 jobs:
   update-shipment-json:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # これを忘れずに設定する
 
     steps:
       - uses: actions/checkout@v4
@@ -22,15 +23,15 @@ jobs:
       - name: 依存ライブラリをインストール
         run: pip install requests
 
-      - name: スクリプト実行（shipmentId取得とJSON更新）
+      - name: shipmentId取得とJSON更新
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         run: python check_bids.py
 
-      - name: JSONの更新をコミット・Push
+      - name: 結果をコミット＆Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json
-          git commit -m "荷物ID (shipmentId) を更新しました" || echo "変更なし"
+          git commit -m "Update shipmentIds data.json" || echo "変更なし"
           git push
