@@ -2,7 +2,7 @@ name: 荷物ID JSON自動更新
 
 on:
   schedule:
-    - cron: '0 0 * *'
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 permissions:
