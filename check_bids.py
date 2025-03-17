@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-JSON_FILE = "data.json"  # 保存する JSON ファイル名
+JSON_FILE = os.path.join(os.path.dirname(__file__), "data.json") 
 
 # 正しいログインURL
 LOGIN_URL = "https://api.torakuru.net/V0/login"
