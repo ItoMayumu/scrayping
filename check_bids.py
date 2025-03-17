@@ -135,8 +135,8 @@ if login_response.ok:
 
                     print(f"{JSON_FILE} に保存しました")
                     
-                    message = f"新しい荷物が追加されました: {new_shipment_ids}"
-                    send_to_slack(message)
+                    message = f"(test)新しい荷物が追加されました: {new_shipment_ids}"
+                    # send_to_slack(message)
             else:
                 print("shipmentId が見つかりませんでした")
 
