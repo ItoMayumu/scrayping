@@ -2,8 +2,7 @@ import requests
 import json
 import os
 
-JSON_FILE = os.path.join(os.path.dirname(__file__), "data.json") 
-
+JSON_FILE = "/home/runner/work/scrayping/scrayping/data.json"
 # 正しいログインURL
 LOGIN_URL = "https://api.torakuru.net/V0/login"
 DATA_URL = "https://api.torakuru.net/V0/protected/admin/getShipmentsWithoutBids?page=1&limit=10"
